@@ -173,7 +173,7 @@
     <!-- 新規部署作成 -->
     <div class="create-card">
         <h2>New Department</h2>
-        <form action="/departments" method="POST">
+        <form action="/todos/departments" method="POST">
             <div class="form-row">
                 <input type="text" name="name" placeholder="部署名 (例: 3年1組)" required maxlength="50">
                 <input type="text" name="description" placeholder="説明 (任意)" maxlength="100">
@@ -207,17 +207,17 @@
             </div>
             <div class="dept-actions">
                 <% if (isMember) { %>
-                    <form action="/departments/<%= dept.id %>/leave" method="POST">
+                    <form action="/todos/departments/<%= dept.id %>/leave" method="POST">
                         <button type="submit" class="btn btn-ghost" style="color: var(--danger);">脱退</button>
                     </form>
                 <% } else { %>
-                    <form action="/departments/<%= dept.id %>/join" method="POST">
+                    <form action="/todos/departments/<%= dept.id %>/join" method="POST">
                         <button type="submit" class="btn btn-primary">参加</button>
                     </form>
                 <% } %>
                 <% if (isMaster) { %>
-                    <a href="/departments/<%= dept.id %>/manage" class="btn btn-ghost">管理</a>
-                    <form action="/departments/<%= dept.id %>/delete" method="POST" onsubmit="return confirm('「<%= dept.name %>」を削除しますか？\nメンバーの所属情報も削除されます。')">
+                    <a href="/todos/departments/<%= dept.id %>/manage" class="btn btn-ghost">管理</a>
+                    <form action="/todos/departments/<%= dept.id %>/delete" method="POST" onsubmit="return confirm('「<%= dept.name %>」を削除しますか？\nメンバーの所属情報も削除されます。')">
                         <button type="submit" class="btn btn-danger">削除</button>
                     </form>
                 <% } %>
