@@ -18,7 +18,7 @@ import { UsersService } from '../users/users.service';
 import { AuthenticatedGuard } from '../users/guards/authenticated.guard';
 import { User } from '../users/entities/user.entity';
 
-@Controller('departments')
+@Controller('todos/departments')
 @UseGuards(AuthenticatedGuard)
 export class DepartmentsController {
   constructor(
@@ -47,7 +47,7 @@ export class DepartmentsController {
     const currentUser = (req as any).user as User;
     try {
       await this.departmentsService.create(dto, currentUser.id);
-      return res.redirect('/departments');
+      return res.redirect('/todos/departments');
     } catch (error: any) {
       const departments = await this.departmentsService.findAll();
       const userWithDepts = await this.usersService.findByIdWithDepartments(currentUser.id);
@@ -72,7 +72,7 @@ export class DepartmentsController {
     const currentUser = (req as any).user as User;
     try {
       await this.departmentsService.remove(id, currentUser);
-      return res.redirect('/departments');
+      return res.redirect('/todos/departments');
     } catch (error: any) {
       const departments = await this.departmentsService.findAll();
       const userWithDepts = await this.usersService.findByIdWithDepartments(currentUser.id);
@@ -132,7 +132,7 @@ export class DepartmentsController {
         await this.usersService.setDepartments(currentUser.id, depts);
       }
     }
-    return res.redirect('/departments');
+    return res.redirect('/todos/departments');
   }
 
   /** 部署から脱退する */
@@ -148,7 +148,7 @@ export class DepartmentsController {
       const depts = (userWithDepts.departments ?? []).filter((d) => d.id !== id);
       await this.usersService.setDepartments(currentUser.id, depts);
     }
-    return res.redirect('/departments');
+    return res.redirect('/todos/departments');
   }
 
   /** 部署の所属メンバーを一括更新（マスターまたは管理者のみ） */
@@ -219,11 +219,11 @@ export class DepartmentsController {
     const currentUser = (req as any).user as User;
     const newMasterId = parseInt(newMasterIdStr, 10);
     if (isNaN(newMasterId)) {
-      return res.redirect(`/departments/${id}/manage`);
+      return res.redirect(`/todos/departments/${id}/manage`);
     }
     try {
       await this.departmentsService.updateMaster(id, newMasterId, currentUser);
-      return res.redirect('/departments');
+      return res.redirect('/todos/departments');
     } catch (error: any) {
       const dept = await this.departmentsService.findOneWithMembers(id);
       const allUsers = await this.usersService.findAll();

@@ -27,7 +27,7 @@ const COOKIE_OPTIONS: express.CookieOptions = {
   sameSite: 'lax',
 };
 
-@Controller()
+@Controller("/todos")
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
@@ -114,7 +114,7 @@ export class UsersController {
   @Get('logout')
   logout(@Res() res: express.Response) {
     res.clearCookie(AUTH_COOKIE_NAME);
-    return res.redirect('/login');
+    return res.redirect('/todos/login');
   }
 
   // ---- プロフィールページ ----

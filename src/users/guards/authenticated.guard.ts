@@ -19,7 +19,7 @@ export class AuthenticatedGuard implements CanActivate {
     const userId = rawUserId ? parseInt(rawUserId, 10) : undefined;
 
     if (!userId || isNaN(userId)) {
-      response.redirect('/login');
+      response.redirect('/todos/login');
       return false;
     }
 
@@ -27,7 +27,7 @@ export class AuthenticatedGuard implements CanActivate {
     if (!user) {
       // CookieはあるがDBにユーザーが存在しない場合はCookieをクリアしてリダイレクト
       response.clearCookie('userId');
-      response.redirect('/login');
+      response.redirect('/todos/login');
       return false;
     }
 
