@@ -632,7 +632,7 @@
 
         <!-- Todo 編集モーダル -->
         <div class="filter-drawer-backdrop" id="editModalBackdrop" onclick="closeEditModal()"></div>
-        <div class="add-card" id="editModal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; width: 90%; max-width: 500px; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+        <div class="add-card" id="editModal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
             <div class="add-card-header" style="cursor: default;">
                 <h2>Todoの編集</h2>
                 <button type="button" class="close-drawer-btn" onclick="closeEditModal()">✕</button>
