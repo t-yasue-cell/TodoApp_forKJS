@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: myapp-api
+    runtime: docker
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false              # Neonの接続文字列をダッシュボードで入力
+      # .envにある他のシークレットも sync: false で並べる
