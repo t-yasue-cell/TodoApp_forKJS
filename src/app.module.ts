@@ -11,6 +11,7 @@ import { Department } from './departments/entities/department.entity';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
+const onRender = process.env.RENDER === 'true';
 
 @Module({
   imports: [
@@ -18,7 +19,10 @@ dotenv.config();
       type: 'postgres',
       url: process.env.DATABASE_URL,
       entities: [Todo, User, Department],
-      synchronize: true, // 開発環境なのでテーブルを自動生成します
+      ssl: onRender,                        // Render(+Neon)のときだけSSL
+      synchronize: !onRender,               // Render以外は今まで通り自動生成
+      migrations: [__dirname + '/migrations/*.js'],
+      migrationsRun: onRender,              // Renderのときだけ起動時にマイグレーション適用
     }),
     TodosModule,
     UsersModule,
